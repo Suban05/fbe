@@ -37,7 +37,7 @@ class TestWho < Minitest::Test
     f = fb.insert
     f.who = 444
     global = {}
-    options = Judges::Options.new({ 'testing' => true })
+    options = Judges::Options.new('testing' => true)
     assert_equal('@torvalds', Fbe.who(f, global:, options:, loog: Loog::NULL))
   end
 end

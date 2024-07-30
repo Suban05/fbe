@@ -35,10 +35,8 @@ require_relative '../../lib/fbe/unmask_repos'
 class TestUnmaskRepos < Minitest::Test
   def test_simple_use
     opts = Judges::Options.new(
-      {
-        'testing' => true,
-        'repositories' => 'yegor256/tacit,zerocracy/*,-zerocracy/judges-action'
-      }
+      'testing' => true,
+      'repositories' => 'yegor256/tacit,zerocracy/*,-zerocracy/judges-action'
     )
     assert(Fbe.unmask_repos(options: opts, global: {}, loog: Loog::NULL).size.positive?)
   end
@@ -46,9 +44,7 @@ class TestUnmaskRepos < Minitest::Test
   def test_live_usage
     skip('Run it only manually, since it touches GitHub API')
     Judges::Options.new(
-      {
-        'repositories' => 'zerocracy/*,-zerocracy/judges-action'
-      }
+      'repositories' => 'zerocracy/*,-zerocracy/judges-action'
     )
     list = Fbe.unmask_repos(options: opts, global: {}, loog: Loog::NULL)
     assert(list.size.positive?)

@@ -38,7 +38,7 @@ class TestIssue < Minitest::Test
     f.repository = 323
     f.issue = 333
     global = {}
-    options = Judges::Options.new({ 'testing' => true })
+    options = Judges::Options.new('testing' => true)
     assert_equal('yegor256/test#333', Fbe.issue(f, global:, options:, loog: Loog::NULL))
   end
 end

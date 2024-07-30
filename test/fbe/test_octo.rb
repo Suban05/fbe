@@ -36,7 +36,7 @@ require_relative '../../lib/fbe/octo'
 class TestOcto < Minitest::Test
   def test_simple_use
     global = {}
-    options = Judges::Options.new({ 'testing' => true })
+    options = Judges::Options.new('testing' => true)
     o = Fbe.octo(loog: Loog::NULL, global:, options:)
     assert(!o.off_quota)
     assert(!o.pull_request('foo/foo', 42).nil?)
@@ -45,14 +45,14 @@ class TestOcto < Minitest::Test
 
   def test_post_comment
     global = {}
-    options = Judges::Options.new({ 'testing' => true })
+    options = Judges::Options.new('testing' => true)
     o = Fbe.octo(loog: Loog::NULL, global:, options:)
     assert_equal(42, o.add_comment('foo/foo', 4, 'hello!')[:id])
   end
 
   def test_detect_bot
     global = {}
-    options = Judges::Options.new({ 'testing' => true })
+    options = Judges::Options.new('testing' => true)
     o = Fbe.octo(loog: Loog::NULL, global:, options:)
     assert_equal('Bot', o.user(29_139_614)[:type])
     assert_equal('User', o.user('yegor256')[:type])
@@ -105,7 +105,7 @@ class TestOcto < Minitest::Test
     skip # it's a "live" test, run it manually if you need it
     WebMock.enable_net_connect!
     global = {}
-    options = Judges::Options.new({ 'github_token' => 'incorrect-value' })
+    options = Judges::Options.new('github_token' => 'incorrect-value')
     o = Fbe.octo(loog: Loog::NULL, global:, options:)
     assert_raises { o.repository('zerocracy/fbe') }
   end
@@ -122,7 +122,7 @@ class TestOcto < Minitest::Test
     WebMock.disable_net_connect!
     global = {}
     pause = 1
-    o = Fbe.octo(loog: Loog::NULL, global:, options: Judges::Options.new({ 'github_api_pause' => pause }))
+    o = Fbe.octo(loog: Loog::NULL, global:, options: Judges::Options.new('github_api_pause' => pause))
     limit = 100
     start_time = Time.now
     105.times do |i|
